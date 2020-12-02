@@ -9,7 +9,8 @@ $email    = "";
 $Name="";
 $password_1="";
 $password_2="";
-$date=date('y-m-d H:i:s');;
+$date=date('y-m-d H:i:s');
+
 require_once("connection.php");
 
 // REGISTER USER
@@ -74,7 +75,7 @@ $query->bindParam(4, $name);
 $query->bindParam(5, $date);
 $query->bindParam(6, $admin);
 if($query->execute()){
-echo '<script language="javascript">alert("Đăng ký thành công! Vui lòng đăng nhập."); window.location="login.php";</script>';
+echo '<script language="javascript">alert("Đăng ký thành công! Vui lòng đăng nhập."); window.location="index.php";</script>';
 }
 }
 //LOGIN
@@ -82,7 +83,7 @@ if (isset($_POST['log_user'])){
 $usernamelg = $_POST['usernamelg'];
 $passwordlg_m = $_POST['passwordlg'];
 if(!$usernamelg || !$passwordlg_m){
-echo '<script language="javascript">alert("Vui lòng nhập đầy đủ thông tin!!"); window.location="login.php";</script>';
+echo '<script language="javascript">alert("Vui lòng nhập đầy đủ thông tin!!"); window.location="index.php";</script>';
 exit;
 }
 else{
@@ -95,20 +96,27 @@ while ($user=$query->fetch()) {
 
 if ($user['username'] === $usernamelg || $user['email']===$usernamelg ){
 if($user['password']===$passwordlg) {
-  $name=$user['fullname'];
+	$name=$user['fullname'];
   $_SESSION['username'] = $name;
+  $_SESSION['admin']=$user['admin'];
+	if($user['admin']==0){
   $_SESSION['logged'] = true;
-echo '<script language="javascript">alert("Đăng nhập thành công! "); window.location="index.php";</script>';
+echo '<script language="javascript">alert("Đăng nhập nhân viên thành công! "); window.location="trangnv.php";</script>';
+}
+else{
+  $_SESSION['logged'] = true;
+echo '<script language="javascript">alert("Đăng nhập quản lý thành công! "); window.location="trangadmin.php";</script>';
 }
 }
 }
 if(($user['username'] != $usernamelg || $user['email']!=$usernamelg)||$user['password']!=$passwordlg) {
-echo '<script language="javascript">alert("Username or password is not correct!! vui lòng nhập lại"); window.location="login.php";</script>';
+echo '<script language="javascript">alert("Username or password is not correct!! vui lòng nhập lại"); window.location="index.php";</script>';
 exit;
 }
 
 }
 
+}
 }
 //RESET PASSWORD
 // if (isset($_POST['log_reset'])){

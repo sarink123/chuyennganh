@@ -7,7 +7,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>DANH SÁCH CÁC CỬA HÀNG- QUẢN LÝ KHO</title>
+<title>DANH SÁCH CÁC NHÀ PHÂN PHỐI- QUẢN LÝ KHO</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -85,27 +85,28 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 	<div style="margin-left: 25%">
 	<article id="box">
 		<table class="w3-table-all w3-hoverable">
-			<?php echo "<h1>DANH SÁCH CỬA HÀNG</h1> <hr>" ?>
+			<?php echo "<h1>DANH SÁCH NHÂN VIÊN</h1> <hr>" ?>
 			<thead>
 				<tr>
-					<th>Mã chi nhánh</th>
-					<th>Tên cửa hàng</th>
+					<th>Mã nhà phân phối</th>
+					<th>Tên nhà phân phối</th>
 					<th>Email</th>
 					<th>Địa chỉ</th>
 					<th>Số điện thoại</th>
 				</tr>
 				<?php 
-				$sql="SELECT * FROM retailer";
+				$sql="SELECT * FROM users";
 				$query = $conn->query($sql);
 				$dis=$query->fetchAll();
 				foreach ($dis as $key => $value) {
 					?>
 						<tr>
 								<th><?php echo $value['id'] ?></th>
-								<th><?php echo $value['name'] ?></th>
+								<th><?php echo $value['fullname'] ?></th>
 								<th><?php echo $value['email'] ?></th>
 								<th><?php echo $value['address'] ?></th>
-								<th><?php echo $value['number'] ?></th>
+								<th><?php echo $value['phone'] ?></th>
+								<th><a href="xoa.php?id=<?php echo $value['id'] ?>"></a>Xoa</th>
 						</tr>
 						<?php
 					}	

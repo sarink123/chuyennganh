@@ -1,5 +1,14 @@
 <?php include('lib\server.php');
 date_default_timezone_set('Asia/Ho_Chi_Minh');
+$query=$conn->query("SELECT * FROM type");
+$query->execute();
+$data=$query->fetchAll(PDO::FETCH_ASSOC);
+$ma=isset($_GET['id'])?$_GET['id']:'';
+$sql="SELECT * FROM importdetails WHERE import_id='$ma'";
+$stm=$conn->prepare($sql);
+$stm->execute();
+$rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html><!DOCTYPE html>
@@ -7,7 +16,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>DANH SÁCH CÁC CỬA HÀNG- QUẢN LÝ KHO</title>
+<title>TRANG CHỦ- QUẢN LÝ KHO</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -82,47 +91,85 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 		</ul>
 	</nav>
-	<div style="margin-left: 25%">
-	<article id="box">
-		<table class="w3-table-all w3-hoverable">
-			<?php echo "<h1>DANH SÁCH CỬA HÀNG</h1> <hr>" ?>
-			<thead>
-				<tr>
-					<th>Mã chi nhánh</th>
-					<th>Tên cửa hàng</th>
-					<th>Email</th>
-					<th>Địa chỉ</th>
-					<th>Số điện thoại</th>
-				</tr>
-				<?php 
-				$sql="SELECT * FROM retailer";
-				$query = $conn->query($sql);
-				$dis=$query->fetchAll();
-				foreach ($dis as $key => $value) {
-					?>
-						<tr>
-								<th><?php echo $value['id'] ?></th>
-								<th><?php echo $value['name'] ?></th>
-								<th><?php echo $value['email'] ?></th>
-								<th><?php echo $value['address'] ?></th>
-								<th><?php echo $value['number'] ?></th>
-						</tr>
-						<?php
-					}	
-
-				?>
-			</thead>
-		</table>
 		
-	</article>
-	</div>
-	<br>
-<div class="jumbotron text-center" style="margin-left: 15%;">
-	<p>
-		CtyTNHH: Haiconnino <br>
-		Địa chỉ: 180 Cao Lô Phường 4 Quận 8 Tp.HCM <br>
-		Điện thoại: <a href="#" style=" color: black;">0909123456</a>
-	</p>
-  </div>
-</body>
+					<div style="margin-left: 25%">
+						<form action="">
+		<table class="w3-table-all w3-hoverable">
+							<tr>
+                  				<td colspan="2">
+                  					<h4 align="center">Chi Tiết Phiếu Nhập</h4>
+                  				</td>
+                  			</tr>
+                  			<?php
+                  			foreach ($rows as $key => $value) {?>
+
+                                	<tr>			
+                  				<td colspan="2"><h2>Chi tiết đơn hàng thứ <?php echo $value['id'] ?></h2></td>
+                  			</tr>
+                  			<tr >
+                  				<td>Mã phiếu nhập: </td>
+                  				<td><input type="text" size="30" value="<?php echo $value['import_id'] ?>"></td>
+                  			</tr>
+                  			<tr >
+                  				<td>Mã hàng: </td>
+                  				<td><input type="text" size="30" value="<?php echo $value['good_id'] ?>"></td>
+                  			</tr>
+                  			<tr >
+                  				<td>Tên hàng: </td>
+                  				<td><input type="text" size="30" value="<?php echo $value['goods_name'] ?>"></td>
+                  			</tr>
+            
+                  			<tr >
+                  				<td>Số lượng: </td>
+                  				<td><input type="text" size="30" placeholder="0" value="<?php echo $value['amount']?>"></td>
+                  				
+                  			</tr>
+                  			<tr >
+                  				<td>Đơn vị tính: </td>
+                  				<td><input type="text" size="30" placeholder="0" value="<?php echo $value['unit'] ?>"></td>
+                  			</tr>
+
+                  			<tr >
+                  				<td>Đơn giá: </td>
+                  				<td><input type="text" size="30" placeholder="0vnđ" value="<?php echo $value['price'] ?>"></td>
+                  			</tr>
+                  			<tr>
+                  				<td>Loại: </td>
+                  				<td>
+                  					<select name="loai">
+                  						<option value="<?php echo $value['type'] ?>"><?php echo $value['type'] ?></option>
+                  						<?php
+                  							foreach ($data as $key => $value) { ?>
+                  								<option value="<?php echo $value['type_id'] ?>">
+                  									<?php echo $value['type_name'] ?>
+                  									</option>
+                  							<?php}
+                  						?>
+                  					</select>
+                  				</td>
+                  			</tr>
+                  			<?php
+                  		}
+                  			?>
+                  			<tr >
+                  				<td colspan="2" style="text-align: center" >
+                  					<input type="submit" value="Sửa" name="sua" href="sua.php?id=<?php echo $value['import_id'] ?>">
+                  					<input type="reset" value="Xóa" name="xoa" href="xoa.php?id=<?php echo $value['import_id']?>"> 
+                  				</td>
+                  			</tr>       
+                  		
+		</table>
+	</form>
+</div>
+
+		<br>
+		<div class="jumbotron text-center" style="margin-left: 15%;">
+			<p>
+				CtyTNHH: Haiconnino <br>
+				Địa chỉ: 180 Cao Lô Phường 4 Quận 8 Tp.HCM <br>
+				Điện thoại: <a href="#" style=" color: black;">0909123456</a>
+			</p>
+		</div>
+
+	</body>
 </html>

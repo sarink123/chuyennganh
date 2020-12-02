@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Quan Ly Kho</title>
+	<title>ĐĂNG KÝ - QUẢN LÝ KHO</title>
 	<link rel="stylesheet" type="text/css" href="stylesheet.css">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -16,7 +16,7 @@
 		<div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header" style="text-align: center;"><b>Register</b></div>
+                    <div class="card-header" style="text-align: center; background-color: black;color: white"><b>Register</b></div>
                     <div class="card-body">
                          <form class="form-horizontal" method="post" action="register.php">
 					
@@ -78,11 +78,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group ">
-                                        <button type="submit" class="btn btn-primary btn-lg btn-block login-button" name="reg_user">Register</button>
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block login-button" name="reg_user" style="background-color: black">Register</button>
                                     </div>
 
-                                    <div class="login-register" style="font-weight: bold;">Already have an account?
-                                        <a href="login.php"> Login</a>
+                                    <div class="login-register" style="font-weight: bold; ">Already have an account?
+                                        <a href="index.php"> Login</a>
                                     </div>
                                     <div class="form-group ">
                                         (*): required
