@@ -14,7 +14,6 @@
 	
 	<div class="container">
 		<div class="row justify-content-center">
-
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header" style="text-align: center; background-color: black;color: white"><b>login</b></div>
@@ -43,8 +42,8 @@
                                     <div class="form-group ">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block login-button" name="log_user" style="background-color: black">Login</button>
                                     </div>
-                                    <div class="login-register">Don't have an account?
-                                        <a href="register.php"> Register</a>
+                                    <div class="login-register">
+                                        <a href="matkhau_2.php"> Forget Password? </a>
                                     </div>
                                 </form>
                             </div>

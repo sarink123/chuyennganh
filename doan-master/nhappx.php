@@ -1,12 +1,12 @@
 <?php include "lib\header.php" ?>
       
-       <div style="margin-left: 15%">
-            <form action="Nhappn.php" method="post">
+      <div style="margin-left: 15%">
+            <form action="nhappx.php" method="post">
             <table class="w3-table-all w3-hoverable"  >
-              <tr><td colspan="2" style="text-align: center;"><h3>ĐIỀN THÔNG TIN PHIẾU NHẬP</h3></td></tr>
+              <tr><td colspan="2" style="text-align: center;"><h3>ĐIỀN THÔNG TIN PHIẾU XUẤT</h3></td></tr>
               <tr >
-                <td>Mã phiếu nhập: </td>
-                <td><input type="text" size="30" value="" name="mapn"></td>
+                <td>Mã phiếu xuất: </td>
+                <td><input type="text" size="30" value="" name="mapx"></td>
               </tr>
               <tr >
                 <td>Mã nhân viên lập phiếu: </td>
@@ -18,8 +18,8 @@
                 <td><input type="text" size="30" value="" name="email"></td>
               </tr>
               <tr >
-                <td>Nhà cung cấp: </td>
-                <td><input type="text" size="30" value="" name="ncc"></td>
+                <td>cửa hàng: </td>
+                <td><input type="text" size="30" value="" name="ch"></td>
                 
               </tr>
               <tr >
@@ -33,7 +33,7 @@
               <tr >
                 <td colspan="2" style="text-align: center" >
                   <input type="reset"  name="reset">
-                  <input type="submit" name="them">
+                  <input type="submit" name="thempx">
                 </td>
               </tr>
               

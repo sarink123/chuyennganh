@@ -1,32 +1,31 @@
 <?php include "lib\header.php" ?>
+		
 					<div style="margin-left: 15%">
 					<form  method="post">
 					<table class="w3-table-all w3-hoverable">
 
                   			<?php
                   			$ma=isset($_GET['id'])?$_GET['id']:'';
-          							$sql="SELECT * FROM importdetails WHERE import_id='$ma'";
+          							$sql="SELECT * FROM exportdetails WHERE export_id='$ma'";
           							$stm=$conn->prepare($sql);
           							$stm->execute();
+
+          							$rows=$stm->fetchAll(PDO::FETCH_ASSOC);
                         ?>
                         <tr>      
-                          <td colspan="2" style="text-align: center;"><h2>Chi tiết phiếu nhập thứ <?php echo $ma ; ?></h2></td>
+                          <td colspan="2" style="text-align: center;"><h2>Chi tiết phiếu xuất <?php echo $ma ; ?></h2></td>
                       </tr>
                       <?php
-          							$rows=$stm->fetchAll(PDO::FETCH_ASSOC);
-                  			foreach ($rows as $key => $value) {	
+                  			foreach ($rows as $key => $value) {
                   				?>
-              				<tr >
-                  				<td>Mã phiếu nhập: </td>
-                  				<td><input type="text" size="30" value="<?php echo $value['import_id'] ?>" name="maph" readonly></td>
-                  			</tr>
+
                   			<tr >
                   				<td>Mã hàng: </td>
                   				<td><input type="text" size="30" value="<?php echo $value['good_id'] ?>" name="mah" readonly></td>
                   			</tr>
                   			<tr >
                   				<td>Tên hàng: </td>
-                  				<td><input type="text" size="30" value="<?php echo $value['goods_name'] ?>" name="tenh" readonly></td>
+                  				<td><input type="text" size="30" value="<?php echo $value['good_name'] ?>" name="tenh" readonly></td>
                   			</tr>
             
                   			<tr >
@@ -46,20 +45,9 @@
                   			<tr>
                   				<td>Loại: </td>
                   				<td>
-                  					<select name="loai">
+                  					<select name="loai" readonly>
                   						<option value="<?php echo $value['type'] ?>"><?php echo $value['type'] ?></option>
-                  						<?php
-                  							$query=$conn->query("SELECT * FROM type");
-          											$query->execute();
-          											$data=$query->fetchAll(PDO::FETCH_ASSOC);
-                  							foreach ($data as $key => $value) { 
-                  								?>
-                  								<option value="<?php echo $value['type_id'] ?>">
-                  									<?php echo $value['type_name'] ?>
-                  									</option>
-                  							<?php
-                  						}
-                  						?>
+                  						
                   					</select>
                   				</td>
                   			</tr>
@@ -68,9 +56,11 @@
                   			<?php
 
                   		}
-                  		?>      
+                  		?>  
+                         
                   	</table>		
 	</form>
+
 </div>
 
 		<br>
